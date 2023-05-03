@@ -1,0 +1,54 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+<section class="vh-100" style="background-color: rgb(216, 112, 147)">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <form method="post" action="{% url 'edit_student_details' Student.id %}" >
+                {% csrf_token %}
+              <h3 class="mb-5">Edit Student</h3>
+  
+              <div class="form-outline mb-4">
+                
+                <input type="text" name="name" value="{{Student.student_name}}">
+                
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="text"  name="address" value="{{Student.student_address}}">
+               
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" name="age" value="{{Student.student_age}}">
+               
+              </div>
+              <div class="form-outline mb-4">
+                <input type="date" name="jdate" class="form-control " value="{{Student.joining_date|date:'Y-m-d'}}" />
+               
+              </div>
+              <div class="form-outline mb-4">
+                <select class="form-control" name="sel">
+                    {% for c in course %}
+                    {% if c.id == Student.course.id %}
+
+
+                    <option value="{{c.id}}" selected>{{c.course_name}}</option>
+                    {% else %}
+                    <option value="{{c.id}}">{{c.course_name}}</option>
+                    {% endif %}
+                    
+                    {% endfor %}
+                  
+                    
+              </div>
+              
+              <input type="Submit" value="Submit">
+              
+  
+            </form>
+
+{% endblock %}
+
